@@ -3,6 +3,11 @@ package es.gme.ree.manager.url;
 import org.junit.Assert;
 import org.junit.Test;
 
+/**
+ * 
+ * @author mdelapenya (http://github.com/mdelapenya)
+ *
+ */
 public class ReeURLBuilderImplTest {
 
 	@Test
