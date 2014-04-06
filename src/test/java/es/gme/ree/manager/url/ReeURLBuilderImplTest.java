@@ -16,24 +16,16 @@ public class ReeURLBuilderImplTest {
 			"http://www.esios.ree.es/Solicitar?fileName=C3_liquicomun_201311&fileType=zip&idioma=es&" +
 			"tipoSolicitar=Publicaciones";
 
-		ReeURLBuilder urlBuilder = new ReeURLBuilderImpl();
+		ReeURLBuilder urlBuilder = new ReeURLBuilderImpl(new ReeURLContext(11, 2013));
 
-		String actualPath = urlBuilder.getURL(11, 2013);
+		String actualPath = urlBuilder.getURL();
 
 		Assert.assertEquals(expectedPath, actualPath);
 	}
 
-	@Test
+	@Test(expected=IllegalArgumentException.class)
 	public void testGetURLMonthGreaterThanTwelve() {
-		ReeURLBuilder urlBuilder = new ReeURLBuilderImpl();
-
-		try {
-			urlBuilder.getURL(13, 2013);
-
-			Assert.fail("Month is invalid");
-		}
-		catch (IllegalArgumentException iae) {
-		}
+		_testGetWrongURL(new ReeURLContext(13, 2013));
 	}
 
 	@Test
@@ -42,9 +34,9 @@ public class ReeURLBuilderImplTest {
 			"http://www.esios.ree.es/Solicitar?fileName=C3_liquicomun_201312&fileType=zip&idioma=es&" +
 			"tipoSolicitar=Publicaciones";
 
-		ReeURLBuilder urlBuilder = new ReeURLBuilderImpl();
+		ReeURLBuilder urlBuilder = new ReeURLBuilderImpl(new ReeURLContext(12, 2013));
 
-		String actualPath = urlBuilder.getURL(12, 2013);
+		String actualPath = urlBuilder.getURL();
 
 		Assert.assertEquals(expectedPath, actualPath);
 	}
@@ -55,25 +47,23 @@ public class ReeURLBuilderImplTest {
 			"http://www.esios.ree.es/Solicitar?fileName=C3_liquicomun_201301&fileType=zip&idioma=es&" +
 			"tipoSolicitar=Publicaciones";
 
-		ReeURLBuilder urlBuilder = new ReeURLBuilderImpl();
+		ReeURLBuilder urlBuilder = new ReeURLBuilderImpl(new ReeURLContext(1, 2013));
 
-		String actualPath = urlBuilder.getURL(1, 2013);
+		String actualPath = urlBuilder.getURL();
 
 		Assert.assertEquals(expectedPath, actualPath);
 	}
 
-	@Test
+	@Test(expected=IllegalArgumentException.class)
 	public void testGetURLMonthLessThanOne() {
-		ReeURLBuilder urlBuilder = new ReeURLBuilderImpl();
-
-		try {
-			urlBuilder.getURL(0, 2013);
-
-			Assert.fail("Month is invalid");
-		}
-		catch (IllegalArgumentException iae) {
-		}
+		_testGetWrongURL(new ReeURLContext(0, 2013));
 	}
 
-	
+	private void _testGetWrongURL(ReeURLContext wrongReeUrlContext) {
+		ReeURLBuilder urlBuilder = new ReeURLBuilderImpl(wrongReeUrlContext);
+
+		urlBuilder.getURL();
+
+		Assert.fail("Month is invalid");
+	}
 }

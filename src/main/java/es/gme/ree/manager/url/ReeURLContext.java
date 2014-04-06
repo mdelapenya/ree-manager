@@ -9,13 +9,6 @@ import es.gme.ree.manager.properties.PropsValues;
  */
 public class ReeURLContext {
 
-	public ReeURLContext() {
-		this(
-			PropsValues.REE_APPLICATION_CTYPE_VALUE, PropsValues.REE_APPLICATION_FILENAME_VALUE, 11, 2013,
-			PropsValues.REE_APPLICATION_FILETYPE_VALUE, PropsValues.REE_APPLICATION_LANGUAGE_VALUE,
-			PropsValues.REE_APPLICATION_REQUESTTYPE_VALUE);
-	}
-
 	public ReeURLContext(int month, int year) {
 		this(
 			PropsValues.REE_APPLICATION_CTYPE_VALUE, PropsValues.REE_APPLICATION_FILENAME_VALUE, month, year,

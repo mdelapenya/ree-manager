@@ -9,10 +9,6 @@ import es.gme.ree.manager.properties.PropsValues;
  */
 public class ReeURLBuilderImpl implements ReeURLBuilder {
 
-	public ReeURLBuilderImpl() {
-		this(new ReeURLContext());
-	}
-
 	public ReeURLBuilderImpl(int month, int year) {
 		this(new ReeURLContext(month, year));
 	}
@@ -21,10 +17,8 @@ public class ReeURLBuilderImpl implements ReeURLBuilder {
 		_reeURLContext = reeURLContext;
 	}
 
-	public String getURL(int month, int year) throws IllegalArgumentException {
-		if (month < 1 || month > 12) {
-			throw new IllegalArgumentException("An invalid month has been introduced.");
-		}
+	public String getURL() throws IllegalArgumentException {
+		_validateContext();
 
 		String fullUrl =
 			_getWebURL() + _getApplicationURL() + _getFileName() + _getFileType() + _getLanguage() +
@@ -77,6 +71,12 @@ public class ReeURLBuilderImpl implements ReeURLBuilder {
 
 	private String _getWebURL() {
 		return PropsValues.REE_URL_BASE;
+	}
+
+	private void _validateContext() {
+		if ((_reeURLContext.getMonth() < 1) || (_reeURLContext.getMonth() > 12)) {
+			throw new IllegalArgumentException("An invalid month has been introduced.");
+		}
 	}
 
 	private ReeURLContext _reeURLContext;
