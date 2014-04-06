@@ -1,5 +1,7 @@
 package es.gme.ree.manager.url;
 
+import es.gme.ree.manager.properties.PropsValues;
+
 /**
  * 
  * @author mdelapenya (http://github.com/mdelapenya)
@@ -8,11 +10,17 @@ package es.gme.ree.manager.url;
 public class ReeURLContext {
 
 	public ReeURLContext() {
-		this(3, "liquicomun", 11, 2013, "zip", "es", "Publicaciones");
+		this(
+			PropsValues.REE_APPLICATION_CTYPE_VALUE, PropsValues.REE_APPLICATION_FILENAME_VALUE, 11, 2013,
+			PropsValues.REE_APPLICATION_FILETYPE_VALUE, PropsValues.REE_APPLICATION_LANGUAGE_VALUE,
+			PropsValues.REE_APPLICATION_REQUESTTYPE_VALUE);
 	}
 
 	public ReeURLContext(int month, int year) {
-		this(3, "liquicomun", month, year, "zip", "es", "Publicaciones");
+		this(
+			PropsValues.REE_APPLICATION_CTYPE_VALUE, PropsValues.REE_APPLICATION_FILENAME_VALUE, month, year,
+			PropsValues.REE_APPLICATION_FILETYPE_VALUE, PropsValues.REE_APPLICATION_LANGUAGE_VALUE,
+			PropsValues.REE_APPLICATION_REQUESTTYPE_VALUE);
 	}
 
 	public ReeURLContext(

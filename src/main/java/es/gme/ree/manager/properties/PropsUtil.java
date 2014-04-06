@@ -6,4 +6,8 @@ public class PropsUtil {
 		return PropsImpl.getInstance().get(key);
 	}
 
+	public static int getInteger(String key) {
+		return PropsImpl.getInstance().getInteger(key);
+	}
+
 }

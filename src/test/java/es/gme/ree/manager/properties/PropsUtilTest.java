@@ -17,6 +17,13 @@ public class PropsUtilTest {
 		Assert.assertEquals("fileType", actual);
 	}
 
+	@Test
+	public void testGetInteger() {
+		int actual = PropsUtil.getInteger("ree.application.cType.value");
+
+		Assert.assertEquals(3, actual);
+	}
+
 	@Test(expected=IllegalArgumentException.class)
 	public void testGetNotFound() {
 		PropsUtil.get("not.found");

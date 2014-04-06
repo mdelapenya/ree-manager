@@ -1,5 +1,7 @@
 package es.gme.ree.manager.url;
 
+import es.gme.ree.manager.properties.PropsValues;
+
 /**
  * 
  * @author mdelapenya (http://github.com/mdelapenya)
@@ -48,8 +50,9 @@ public class ReeURLBuilderImpl implements ReeURLBuilder {
 
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("?fileName=");
-		sb.append("C");
+		sb.append("?");
+		sb.append(PropsValues.REE_APPLICATION_FILENAME_PARAM);
+		sb.append("=C");
 		sb.append(_reeURLContext.getcType());
 		sb.append("_");
 		sb.append(_reeURLContext.getFileName());
@@ -61,19 +64,19 @@ public class ReeURLBuilderImpl implements ReeURLBuilder {
 	}
 
 	private String _getFileType() {
-		return "&fileType=" + _reeURLContext.getFileType();
+		return "&" + PropsValues.REE_APPLICATION_FILETYPE_PARAM + "=" + _reeURLContext.getFileType();
 	}
 
 	private String _getLanguage() {
-		return "&idioma=" + _reeURLContext.getLanguage();
+		return "&" + PropsValues.REE_APPLICATION_LANGUAGE_PARAM + "=" + _reeURLContext.getLanguage();
 	}
 
 	private String _getRequestType() {
-		return "&tipoSolicitar=" + _reeURLContext.getRequestType();
+		return "&" + PropsValues.REE_APPLICATION_REQUESTTYPE_PARAM + "=" + _reeURLContext.getRequestType();
 	}
 
 	private String _getWebURL() {
-		return "http://www.esios.ree.es/";
+		return PropsValues.REE_URL_BASE;
 	}
 
 	private ReeURLContext _reeURLContext;

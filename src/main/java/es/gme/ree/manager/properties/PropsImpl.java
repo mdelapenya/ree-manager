@@ -20,11 +20,15 @@ public class PropsImpl {
 	}
 
 	public String get(String key) {
-		if (!_props.containsKey(key)) {
-			throw new IllegalArgumentException("Property is not present");
-		}
+		_isPresent(key);
 
 		return _props.getProperty(key);
+	}
+
+	public int getInteger(String key) {
+		_isPresent(key);
+
+		return Integer.valueOf(_props.getProperty(key));
 	}
 
 	private PropsImpl() {
@@ -40,6 +44,12 @@ public class PropsImpl {
 		}
 		catch (IOException ioe) {
 			throw new RuntimeException("Configuration file not found on classpath");
+		}
+	}
+
+	private void _isPresent(String key) {
+		if (!_props.containsKey(key)) {
+			throw new IllegalArgumentException("Property is not present");
 		}
 	}
 
