@@ -30,14 +30,14 @@ public class ZipHelperImplTest {
 	public void testExtractFileFromNotValidURLZip() throws Exception {
 		URL url = new URL("null");
 
-		_zipHelper.extractFilesFromZip(url, PropsValues.REE_APPLICATION_FILES_GRCOSDCN);
+		_zipHelper.extractFilesFromZip(url, PropsValues.REE_APPLICATION_FILES_GRCOSDNC);
 	}
 
 	@Test
 	public void testExtractFileFromNotValidZip() throws Exception {
 		URL url = this.getClass().getResource("dependencies/notValidZip.txt");
 
-		List<File> grcosdcnFiles = _zipHelper.extractFilesFromZip(url, PropsValues.REE_APPLICATION_FILES_GRCOSDCN);
+		List<File> grcosdcnFiles = _zipHelper.extractFilesFromZip(url, PropsValues.REE_APPLICATION_FILES_GRCOSDNC);
 
 		Assert.assertEquals(0, grcosdcnFiles.size());
 	}
@@ -46,7 +46,7 @@ public class ZipHelperImplTest {
 	public void testExtractFileFromZip() throws Exception {
 		URL url = this.getClass().getResource("dependencies/" + _reeURLContext.getFullFileName() + ".zip");
 
-		List<File> grcosdncFiles = _zipHelper.extractFilesFromZip(url, PropsValues.REE_APPLICATION_FILES_GRCOSDCN);
+		List<File> grcosdncFiles = _zipHelper.extractFilesFromZip(url, PropsValues.REE_APPLICATION_FILES_GRCOSDNC);
 
 		Assert.assertEquals(1, grcosdncFiles.size());
 
@@ -59,7 +59,7 @@ public class ZipHelperImplTest {
 	public void testExtractFileFromZipNotFound() throws Exception {
 		URL url = this.getClass().getResource("dependencies/notFound.zip");
 
-		_zipHelper.extractFilesFromZip(url, PropsValues.REE_APPLICATION_FILES_GRCOSDCN);
+		_zipHelper.extractFilesFromZip(url, PropsValues.REE_APPLICATION_FILES_GRCOSDNC);
 
 		Assert.fail("A NullPointerException should have been thrown");
 	}

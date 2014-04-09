@@ -2,7 +2,7 @@ package es.gme.ree.manager.properties;
 
 public class PropsValues {
 
-	public static final String REE_APPLICATION_FILES_GRCOSDCN = PropsUtil.get(PropsKeys.REE_APPLICATION_FILES_GRCOSDCN);
+	public static final String REE_APPLICATION_FILES_GRCOSDNC = PropsUtil.get(PropsKeys.REE_APPLICATION_FILES_GRCOSDNC);
 
 	public static final String REE_APPLICATION_FILES_PERTARIF = PropsUtil.get(PropsKeys.REE_APPLICATION_FILES_PERTARIF);
 

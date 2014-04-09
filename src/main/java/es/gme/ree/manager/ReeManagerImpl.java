@@ -39,7 +39,7 @@ public class ReeManagerImpl implements ReeManager {
 
 			ZipHelper zipHelper = new ZipHelperImpl(_reeURLContext);
 
-			zipHelper.extractFilesFromZip(url, PropsValues.REE_APPLICATION_FILES_GRCOSDCN);
+			zipHelper.extractFilesFromZip(url, PropsValues.REE_APPLICATION_FILES_GRCOSDNC);
 		}
 		catch (MalformedURLException mue) {
 			mue.printStackTrace();
