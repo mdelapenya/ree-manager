@@ -3,6 +3,7 @@ package es.gme.ree.manager.zip;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -29,32 +30,36 @@ public class ZipHelperImplTest {
 	public void testExtractFileFromNotValidURLZip() throws Exception {
 		URL url = new URL("null");
 
-		_zipHelper.extractFileFromZip(PropsValues.REE_APPLICATION_FILES_GRCOSDCN, url);
+		_zipHelper.extractFilesFromZip(url, PropsValues.REE_APPLICATION_FILES_GRCOSDCN);
 	}
 
 	@Test
 	public void testExtractFileFromNotValidZip() throws Exception {
 		URL url = this.getClass().getResource("dependencies/notValidZip.txt");
 
-		File grcosdcn = _zipHelper.extractFileFromZip(PropsValues.REE_APPLICATION_FILES_GRCOSDCN, url);
+		List<File> grcosdcnFiles = _zipHelper.extractFilesFromZip(url, PropsValues.REE_APPLICATION_FILES_GRCOSDCN);
 
-		Assert.assertNull(grcosdcn);
+		Assert.assertEquals(0, grcosdcnFiles.size());
 	}
 
 	@Test
 	public void testExtractFileFromZip() throws Exception {
 		URL url = this.getClass().getResource("dependencies/" + _reeURLContext.getFullFileName() + ".zip");
 
-		File grcosdcn = _zipHelper.extractFileFromZip(PropsValues.REE_APPLICATION_FILES_GRCOSDCN, url);
+		List<File> grcosdncFiles = _zipHelper.extractFilesFromZip(url, PropsValues.REE_APPLICATION_FILES_GRCOSDCN);
 
-		Assert.assertNotNull(grcosdcn);
+		Assert.assertEquals(1, grcosdncFiles.size());
+
+		File grcosdnc = grcosdncFiles.get(0);
+
+		Assert.assertTrue(grcosdnc.getName().contains("grcosdnc"));
 	}
 
 	@Test(expected=NullPointerException.class)
 	public void testExtractFileFromZipNotFound() throws Exception {
 		URL url = this.getClass().getResource("dependencies/notFound.zip");
 
-		_zipHelper.extractFileFromZip(PropsValues.REE_APPLICATION_FILES_GRCOSDCN, url);
+		_zipHelper.extractFilesFromZip(url, PropsValues.REE_APPLICATION_FILES_GRCOSDCN);
 
 		Assert.fail("A NullPointerException should have been thrown");
 	}

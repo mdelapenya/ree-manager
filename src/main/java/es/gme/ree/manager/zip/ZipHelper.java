@@ -3,6 +3,7 @@ package es.gme.ree.manager.zip;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 
 import org.apache.commons.compress.archivers.ArchiveException;
 
@@ -13,6 +14,6 @@ import org.apache.commons.compress.archivers.ArchiveException;
  */
 public interface ZipHelper {
 
-	public File extractFileFromZip(String fileName, URL zipFileUrl) throws ArchiveException, IOException;
+	public List<File> extractFilesFromZip(URL zipFileUrl, String... fileNames) throws ArchiveException, IOException;
 
 }

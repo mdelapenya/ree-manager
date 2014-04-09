@@ -9,6 +9,8 @@ import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.compress.archivers.ArchiveException;
 import org.apache.commons.compress.archivers.ArchiveInputStream;
@@ -34,10 +36,12 @@ public class ZipHelperImpl implements ZipHelper {
 		_reeURLContext = reeURLContext;
 	}
 
-	public File extractFileFromZip(String fileName, URL zipFileUrl) throws ArchiveException, IOException {
+	public List<File> extractFilesFromZip(URL zipFileUrl, String... fileNames) throws ArchiveException, IOException {
 		InputStream is = null;
 		ArchiveInputStream in = null;
 		OutputStream out = null;
+
+		List<File> extractedFiles = new ArrayList<File>();
 
 		try {
 			File zipFile = new File(zipFileUrl.toURI());
@@ -50,12 +54,12 @@ public class ZipHelperImpl implements ZipHelper {
 
 			ZipArchiveEntry entry = null;
 
-			String fullFileName = _reeURLContext.getFullFileName(fileName);
+			String[] fullFileNames = _getFullFileNames(fileNames);
 
 			while ((entry = (ZipArchiveEntry)in.getNextEntry()) != null) {
 				String zipEntryFileName = entry.getName();
 
-				if (fullFileName.equals(zipEntryFileName)) {
+				if (_containsFileName(fullFileNames, zipEntryFileName)) {
 					File output = new File(PropsValues.URL_DOWNLOAD_FOLDER, zipEntryFileName);
 	
 					try {
@@ -63,17 +67,23 @@ public class ZipHelperImpl implements ZipHelper {
 
 						IOUtils.copy(in, out);
 
-						return output;
+						extractedFiles.add(output);
 					}
 					finally {
 						if (out != null) {
 							out.close();
 						}
+
+						// do not keep searching, as all files were found
+
+						if (extractedFiles.size() == fileNames.length) {
+							return extractedFiles;
+						}
 					}
 				}
 			}
 
-			return null;
+			return extractedFiles;
 		}
 		catch (MalformedURLException mue) {
 			throw new IOException(mue);
@@ -90,6 +100,30 @@ public class ZipHelperImpl implements ZipHelper {
 				is.close();
 			}
 		}
+	}
+
+	private boolean _containsFileName(String[] fullFileNames, String currentFileName) {
+		for (String fullFileName : fullFileNames) {
+			if (fullFileName.equals(currentFileName)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	private String[] _getFullFileNames(String... fileNames) {
+		if (fileNames.length == 0) {
+			return new String[0];
+		}
+
+		String[] fullFileNames = new String[fileNames.length];
+
+		for (int i = 0; i < fileNames.length; i++) {
+			fullFileNames[i] = _reeURLContext.getFullFileName(fileNames[i]);
+		}
+
+		return fullFileNames;
 	}
 
 	private ReeURLContext _reeURLContext;
