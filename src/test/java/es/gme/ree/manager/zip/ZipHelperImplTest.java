@@ -21,24 +21,22 @@ public class ZipHelperImplTest {
 	@BeforeClass
 	public static void setUpClass() throws Exception {
 		_reeURLContext = new ReeURLContext(11, 2013);
+
+		_zipHelper = new ZipHelperImpl(_reeURLContext);
 	}
 
 	@Test(expected=IOException.class)
 	public void testExtractFileFromNotValidURLZip() throws Exception {
 		URL url = new URL("null");
 
-		ZipHelper zipper = new ZipHelperImpl(_reeURLContext);
-
-		zipper.extractFileFromZip(PropsValues.REE_APPLICATION_FILES_GRCOSDCN, url);
+		_zipHelper.extractFileFromZip(PropsValues.REE_APPLICATION_FILES_GRCOSDCN, url);
 	}
 
 	@Test
 	public void testExtractFileFromNotValidZip() throws Exception {
 		URL url = this.getClass().getResource("dependencies/notValidZip.txt");
 
-		ZipHelper zipper = new ZipHelperImpl(_reeURLContext);
-
-		File grcosdcn = zipper.extractFileFromZip(PropsValues.REE_APPLICATION_FILES_GRCOSDCN, url);
+		File grcosdcn = _zipHelper.extractFileFromZip(PropsValues.REE_APPLICATION_FILES_GRCOSDCN, url);
 
 		Assert.assertNull(grcosdcn);
 	}
@@ -47,9 +45,7 @@ public class ZipHelperImplTest {
 	public void testExtractFileFromZip() throws Exception {
 		URL url = this.getClass().getResource("dependencies/" + _reeURLContext.getFullFileName() + ".zip");
 
-		ZipHelper zipper = new ZipHelperImpl(_reeURLContext);
-
-		File grcosdcn = zipper.extractFileFromZip(PropsValues.REE_APPLICATION_FILES_GRCOSDCN, url);
+		File grcosdcn = _zipHelper.extractFileFromZip(PropsValues.REE_APPLICATION_FILES_GRCOSDCN, url);
 
 		Assert.assertNotNull(grcosdcn);
 	}
@@ -58,13 +54,12 @@ public class ZipHelperImplTest {
 	public void testExtractFileFromZipNotFound() throws Exception {
 		URL url = this.getClass().getResource("dependencies/notFound.zip");
 
-		ZipHelper zipper = new ZipHelperImpl(_reeURLContext);
-
-		zipper.extractFileFromZip(PropsValues.REE_APPLICATION_FILES_GRCOSDCN, url);
+		_zipHelper.extractFileFromZip(PropsValues.REE_APPLICATION_FILES_GRCOSDCN, url);
 
 		Assert.fail("A NullPointerException should have been thrown");
 	}
 
 	private static ReeURLContext _reeURLContext;
+	private static ZipHelper _zipHelper;
 
 }
