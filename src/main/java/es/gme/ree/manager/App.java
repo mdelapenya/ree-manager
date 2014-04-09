@@ -1,12 +1,5 @@
 package es.gme.ree.manager;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-
-import org.apache.commons.io.FileUtils;
-
 /**
  * Hello world!
  * 
@@ -14,23 +7,75 @@ import org.apache.commons.io.FileUtils;
 public class App {
 
 	public static void main(String[] args) {
-		System.out.println("Hello World!");
+		ValidationResult validationResult = _validate(args);
 
-		String path =
-			"http://www.esios.ree.es/Solicitar?fileName=C3_liquicomun_201311&fileType=zip&idioma=es&" +
-			"tipoSolicitar=Publicaciones";
+		if (!validationResult.getResult()) {
+			_printUsage();
+
+			System.exit(1);
+		}
+
+		ReeManager reeManager = new ReeManagerImpl(validationResult.getMonth(), validationResult.getYear());
+
+		reeManager.process();
+	}
+
+	private static void _printUsage() {
+		System.err.println("Usage: ");
+		System.err.println("\tYear: a valid year");
+		System.err.println("\tMonth: a valid month");
+	}
+
+	private static ValidationResult _validate(String[] args) {
+		if (args.length != 2) {
+			return new ValidationResult();
+		}
+
+		String strYear = args[0];
+		String strMonth = args[1];
 
 		try {
-			File localFile = new File("/tmp/foo");
+			int year = Integer.parseInt(strYear);
 
-			FileUtils.copyURLToFile(new URL(path), localFile);
+			int month = Integer.parseInt(strMonth);
+
+			if ((month < 1) || (month > 12)) {
+				return new ValidationResult();
+			}
+
+			return new ValidationResult(month, year);
 		}
-		catch (MalformedURLException mue) {
-			mue.printStackTrace();
+		catch (NumberFormatException nfe) {
+			return new ValidationResult();
 		}
-		catch (IOException ioe) {
-			ioe.printStackTrace();
+	}
+
+	private static class ValidationResult {
+		public ValidationResult() {
+			_result = false;
 		}
+
+		public ValidationResult(int month, int year) {
+			_result = true;
+			_month = month;
+			_year = year;
+		}
+
+		public int getMonth() {
+			return _month;
+		}
+
+		public boolean getResult() {
+			return _result;
+		}
+
+		public int getYear() {
+			return _year;
+		}
+
+		private int _month;
+		private boolean _result;
+		private int _year;
 	}
 
 }
