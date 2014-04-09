@@ -9,7 +9,7 @@ import es.gme.ree.manager.properties.PropsValues;
  */
 public class ReeURLContext {
 
-	public ReeURLContext(int month, int year) {
+	public ReeURLContext(int month, int year) throws IllegalArgumentException {
 		this(
 			PropsValues.REE_APPLICATION_CTYPE_VALUE, PropsValues.REE_APPLICATION_FILENAME_VALUE, month, year,
 			PropsValues.REE_APPLICATION_FILETYPE_VALUE, PropsValues.REE_APPLICATION_LANGUAGE_VALUE,
@@ -17,7 +17,10 @@ public class ReeURLContext {
 	}
 
 	public ReeURLContext(
-		int cType, String fileName, int month, int year, String fileType, String language, String requestType) {
+			int cType, String fileName, int month, int year, String fileType, String language, String requestType)
+		throws IllegalArgumentException{
+
+		_validateContext(month);
 
 		this.cType = cType;
 		this.fileName = fileName;
@@ -111,6 +114,12 @@ public class ReeURLContext {
 		}
 
 		return sb.toString();
+	}
+
+	private void _validateContext(int month) {
+		if ((month < 1) || (month > 12)) {
+			throw new IllegalArgumentException("An invalid month has been introduced.");
+		}
 	}
 
 	private int cType;

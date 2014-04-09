@@ -17,9 +17,7 @@ public class ReeURLBuilderImpl implements ReeURLBuilder {
 		_reeURLContext = reeURLContext;
 	}
 
-	public String getURL() throws IllegalArgumentException {
-		_validateContext();
-
+	public String getURL() {
 		String fullUrl =
 			_getWebURL() + _getApplicationURL() + _getFileName() + _getFileType() + _getLanguage() +
 			_getRequestType();
@@ -66,12 +64,6 @@ public class ReeURLBuilderImpl implements ReeURLBuilder {
 
 	private String _getWebURL() {
 		return PropsValues.REE_URL_BASE;
-	}
-
-	private void _validateContext() {
-		if ((_reeURLContext.getMonth() < 1) || (_reeURLContext.getMonth() > 12)) {
-			throw new IllegalArgumentException("An invalid month has been introduced.");
-		}
 	}
 
 	private ReeURLContext _reeURLContext;
