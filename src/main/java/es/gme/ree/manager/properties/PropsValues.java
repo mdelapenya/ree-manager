@@ -2,6 +2,15 @@ package es.gme.ree.manager.properties;
 
 public class PropsValues {
 
+	public static final String REE_APPLICATION_FILES_GRCOSDCN = PropsUtil.get(PropsKeys.REE_APPLICATION_FILES_GRCOSDCN);
+
+	public static final String REE_APPLICATION_FILES_PERTARIF = PropsUtil.get(PropsKeys.REE_APPLICATION_FILES_PERTARIF);
+
+	public static final String REE_APPLICATION_FILES_PETAR_TARIFA = PropsUtil.get(
+		PropsKeys.REE_APPLICATION_FILES_PETAR_TARIFA);
+
+	public static final String REE_APPLICATION_FILES_PRMDIARI = PropsUtil.get(PropsKeys.REE_APPLICATION_FILES_PRMDIARI);
+
 	public static int REE_APPLICATION_CTYPE_VALUE = PropsUtil.getInteger(PropsKeys.REE_APPLICATION_CTYPE_VALUE);
 
 	public static String REE_APPLICATION_FILETYPE_PARAM = PropsUtil.get(PropsKeys.REE_APPLICATION_FILETYPE_PARAM);

@@ -46,13 +46,8 @@ public class ReeURLBuilderImpl implements ReeURLBuilder {
 
 		sb.append("?");
 		sb.append(PropsValues.REE_APPLICATION_FILENAME_PARAM);
-		sb.append("=C");
-		sb.append(_reeURLContext.getcType());
-		sb.append("_");
-		sb.append(_reeURLContext.getFileName());
-		sb.append("_");
-		sb.append(_reeURLContext.getYear());
-		sb.append(strMonth);
+		sb.append("=");
+		sb.append(_reeURLContext.getFullFileName());
 
 		return sb.toString();
 	}

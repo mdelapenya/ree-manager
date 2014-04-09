@@ -77,6 +77,42 @@ public class ReeURLContext {
 		return year;
 	}
 
+	public String getFullFileName() {
+		return getFullFileName(this.getFileName());
+	}
+
+	public String getFullFileName(String fileName) {
+		String strMonth = "";
+
+		int month = this.getMonth();
+
+		if (month < 10) {
+			strMonth += "0";
+		}
+
+		strMonth += month;
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("C");
+		sb.append(this.getcType());
+		sb.append("_");
+		sb.append(fileName);
+		sb.append("_");
+		sb.append(this.getYear());
+		sb.append(strMonth);
+
+		if (!fileName.equalsIgnoreCase(this.getFileName())) {
+			sb.append("01");
+			sb.append("_");
+			sb.append(this.getYear());
+			sb.append(strMonth);
+			sb.append("30");
+		}
+
+		return sb.toString();
+	}
+
 	private int cType;
 	private String fileName;
 	private String fileType;

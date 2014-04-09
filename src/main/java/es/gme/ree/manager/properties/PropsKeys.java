@@ -7,6 +7,11 @@ package es.gme.ree.manager.properties;
  */
 public class PropsKeys {
 
+	public static final String REE_APPLICATION_FILES_GRCOSDCN = "ree.application.files.grcosdnc";
+	public static final String REE_APPLICATION_FILES_PERTARIF = "ree.application.files.pertarif";
+	public static final String REE_APPLICATION_FILES_PETAR_TARIFA = "ree.application.files.petar.tarifa";
+	public static final String REE_APPLICATION_FILES_PRMDIARI = "ree.application.files.prmdiari";
+
 	public static final String REE_APPLICATION_CTYPE_VALUE = "ree.application.cType.value";
 
 	public static final String REE_APPLICATION_FILETYPE_PARAM = "ree.application.fileType.param";
