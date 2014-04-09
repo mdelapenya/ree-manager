@@ -64,6 +64,29 @@ public class ZipHelperImplTest {
 		Assert.fail("A NullPointerException should have been thrown");
 	}
 
+	@Test
+	public void testExtractFilesFromZip() throws Exception {
+		URL url = this.getClass().getResource("dependencies/" + _reeURLContext.getFullFileName() + ".zip");
+
+		List<File> extractedFiles = _zipHelper.extractFilesFromZip(
+			url, PropsValues.REE_APPLICATION_FILES_GRCOSDNC, PropsValues.REE_APPLICATION_FILES_PERTARIF,
+			PropsValues.REE_APPLICATION_FILES_PRMDIARI);
+
+		Assert.assertEquals(3, extractedFiles.size());
+
+		File grcosdnc = extractedFiles.get(0);
+
+		Assert.assertTrue(grcosdnc.getName().contains("grcosdnc"));
+
+		File pertarif = extractedFiles.get(1);
+
+		Assert.assertTrue(pertarif.getName().contains("pertarif"));
+
+		File prmdiari = extractedFiles.get(2);
+
+		Assert.assertTrue(prmdiari.getName().contains("prmdiari"));
+	}
+
 	private static ReeURLContext _reeURLContext;
 	private static ZipHelper _zipHelper;
 
