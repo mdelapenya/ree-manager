@@ -39,7 +39,7 @@ public class App {
 
 			int month = Integer.parseInt(strMonth);
 
-			if ((month < 1) || (month > 12)) {
+			if (month < 1 || month > 12) {
 				return new ValidationResult();
 			}
 

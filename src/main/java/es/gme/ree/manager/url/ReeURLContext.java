@@ -117,7 +117,7 @@ public class ReeURLContext {
 	}
 
 	private void _validateContext(int month) {
-		if ((month < 1) || (month > 12)) {
+		if (month < 1 || month > 12) {
 			throw new IllegalArgumentException("An invalid month has been introduced.");
 		}
 	}
