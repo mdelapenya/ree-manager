@@ -14,6 +14,6 @@ import org.apache.commons.compress.archivers.ArchiveException;
  */
 public interface ZipHelper {
 
-	public List<File> extractFilesFromZip(URL zipFileUrl, String... fileNames) throws ArchiveException, IOException;
+	List<File> extractFilesFromZip(URL zipFileUrl, String... fileNames) throws ArchiveException, IOException;
 
 }

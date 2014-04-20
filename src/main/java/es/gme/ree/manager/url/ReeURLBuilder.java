@@ -7,6 +7,6 @@ package es.gme.ree.manager.url;
  */
 public interface ReeURLBuilder {
 
-	public String getURL() throws IllegalArgumentException;
+	String getURL() throws IllegalArgumentException;
 
 }

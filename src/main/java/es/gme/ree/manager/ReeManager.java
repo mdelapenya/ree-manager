@@ -7,6 +7,6 @@ package es.gme.ree.manager;
  */
 public interface ReeManager {
 
-	public void process();
+	void process();
 
 }
