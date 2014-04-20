@@ -68,16 +68,16 @@ public class ZipHelperImpl implements ZipHelper {
 						IOUtils.copy(in, out);
 
 						extractedFiles.add(output);
-					}
-					finally {
-						if (out != null) {
-							out.close();
-						}
 
 						// do not keep searching, as all files were found
 
 						if (extractedFiles.size() == fileNames.length) {
 							return extractedFiles;
+						}
+					}
+					finally {
+						if (out != null) {
+							out.close();
 						}
 					}
 				}
