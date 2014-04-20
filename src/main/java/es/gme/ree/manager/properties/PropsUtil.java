@@ -6,6 +6,10 @@ public class PropsUtil {
 		return PropsImpl.getInstance().get(key);
 	}
 
+	public static String[] getArray(String keys) {
+		return PropsImpl.getInstance().getStringArray(keys);
+	}
+
 	public static int getInteger(String key) {
 		return PropsImpl.getInstance().getInteger(key);
 	}

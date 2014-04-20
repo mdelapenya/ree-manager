@@ -25,6 +25,14 @@ public class PropsImpl {
 		return _props.getProperty(key);
 	}
 
+	public String[] getStringArray(String key) {
+		_isPresent(key);
+
+		String value = _props.getProperty(key);
+
+		return value.split(",");
+	}
+
 	public int getInteger(String key) {
 		_isPresent(key);
 

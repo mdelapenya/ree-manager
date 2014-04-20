@@ -20,6 +20,17 @@ public class PropsImplTest {
 	}
 
 	@Test
+	public void testGetArray() {
+		PropsImpl instance = PropsImpl.getInstance();
+
+		String[] actual = instance.getStringArray("test.array");
+
+		for (int i = 0; i < actual.length; i++) {
+			Assert.assertEquals(String.valueOf(i), actual[i]);
+		}
+	}
+
+	@Test
 	public void testGetInteger() {
 		PropsImpl instance = PropsImpl.getInstance();
 
