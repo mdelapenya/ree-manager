@@ -49,6 +49,12 @@ public class PropsImpl {
 			is = getClass().getResourceAsStream("/ree-ext.properties");
 
 			_props.load(is);
+
+			is = getClass().getResourceAsStream("/ree-test.properties");
+
+			if (is != null) {
+				_props.load(is);
+			}
 		}
 		catch (IOException ioe) {
 			throw new RuntimeException("Configuration file not found on classpath");
