@@ -48,7 +48,9 @@ public class PropsImpl {
 
 			is = getClass().getResourceAsStream("/ree-ext.properties");
 
-			_props.load(is);
+			if (is != null) {
+				_props.load(is);
+			}
 
 			is = getClass().getResourceAsStream("/ree-test.properties");
 
