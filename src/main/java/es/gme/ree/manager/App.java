@@ -1,8 +1,9 @@
 package es.gme.ree.manager;
 
 /**
- * Hello world!
+ * Example App
  * 
+ * @author mdelapenya (http://github.com/mdelapenya)
  */
 public class App {
 
